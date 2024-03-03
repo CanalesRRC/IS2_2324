@@ -6,7 +6,7 @@ import es.unican.is2.franquiciasuc.common.OperacionNoValidaException;
 import es.unican.is2.franquiciasuc.common.Tienda;
 import es.unican.is2.franquiciasuc.dao.TiendasDAO;
 
-public class GestionTiendas implements IGestionTiendas {
+public class GestionTiendas implements IGestionTiendas{
 	
 	private TiendasDAO tiendasDAO;
 
@@ -16,20 +16,38 @@ public class GestionTiendas implements IGestionTiendas {
 
 	@Override
 	public Tienda nuevaTienda(Tienda t) throws DataAccessException {
-		// TODO Auto-generated method stub
-		return null;
+		
+		Tienda tienda = tiendasDAO.tiendaPorNombre(t.getNombre());
+		
+		// Comprobar si existe la tienda
+		if (tienda != null) {
+			return null;
+		}
+		
+		return tiendasDAO.crearTienda(t);
 	}
 
 	@Override
 	public Tienda eliminarTienda(String nombre) throws OperacionNoValidaException, DataAccessException {
-		// TODO Auto-generated method stub
-		return null;
+
+		Tienda tienda = tiendasDAO.tiendaPorNombre(nombre);
+		
+		// Comprobar si existe la tienda
+		if (tienda == null) {
+			return null;
+		}
+	
+		if (!tienda.getEmpleados().isEmpty()) {
+            throw new OperacionNoValidaException("La tienda tiene empleados y no puede ser eliminada.");
+        }
+		
+		return tiendasDAO.eliminarTienda(tienda.getId());
 	}
 
 	@Override
 	public Tienda tienda(String nombre) throws DataAccessException {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return tiendasDAO.tiendaPorNombre(nombre);
 	}
 
 }
