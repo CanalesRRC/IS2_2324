@@ -2,26 +2,26 @@ package es.unican.is2.franquiciasuc.business;
 
 import es.unican.is2.franquiciasuc.common.DataAccessException;
 import es.unican.is2.franquiciasuc.common.Empleado;
+import es.unican.is2.franquiciasuc.common.IEmpleadosDAO;
 import es.unican.is2.franquiciasuc.common.IGestionEmpleados;
+import es.unican.is2.franquiciasuc.common.ITiendasDAO;
 import es.unican.is2.franquiciasuc.common.OperacionNoValidaException;
 import es.unican.is2.franquiciasuc.common.Tienda;
-import es.unican.is2.franquiciasuc.dao.EmpleadosDAO;
-import es.unican.is2.franquiciasuc.dao.TiendasDAO;
 
 public class GestionEmpleados implements IGestionEmpleados{
 	
-	private TiendasDAO tiendasDAO;
-	private EmpleadosDAO empleadosDAO;
+	private ITiendasDAO intTiendas;
+	private IEmpleadosDAO intEmpleados;
 
-	public GestionEmpleados(TiendasDAO tiendasDAO, EmpleadosDAO empleadosDAO) {
-		this.tiendasDAO = tiendasDAO;
-		this.empleadosDAO = empleadosDAO;
+	public GestionEmpleados(ITiendasDAO intTiendas, IEmpleadosDAO intEmpleados) {
+		this.intTiendas = intTiendas;
+		this.intEmpleados = intEmpleados;
 	}
 
 	@Override
 	public Empleado nuevoEmpleado(Empleado e, String nombre) throws OperacionNoValidaException, DataAccessException {
 		
-		Tienda t = tiendasDAO.tiendaPorNombre(nombre);
+		Tienda t = intTiendas.tiendaPorNombre(nombre);
 		
 		// Comprobar si la tienda existe
 		if (t == null) {
@@ -34,7 +34,7 @@ public class GestionEmpleados implements IGestionEmpleados{
 	    }
 		
 		// Anhadir empleado al sistema
-		empleadosDAO.crearEmpleado(e);
+		intEmpleados.crearEmpleado(e);
 		
 		// Anhadir empleado a la tienda
 		t.getEmpleados().add(e);
@@ -46,7 +46,7 @@ public class GestionEmpleados implements IGestionEmpleados{
 	@Override
 	public Empleado eliminarEmpleado(String dni, String nombre) throws OperacionNoValidaException, DataAccessException {
 
-		Tienda t = tiendasDAO.tiendaPorNombre(nombre);
+		Tienda t = intTiendas.tiendaPorNombre(nombre);
 		Empleado e = empleado(dni);
 		
 		// Comprobar si el empleado y la tienda existen
@@ -63,7 +63,7 @@ public class GestionEmpleados implements IGestionEmpleados{
 		t.getEmpleados().remove(e);
 		
 		// Eliminar empleado del sistema
-		empleadosDAO.eliminarEmpleado(dni);
+		intEmpleados.eliminarEmpleado(dni);
 		
 		return e;
 	}
@@ -72,8 +72,8 @@ public class GestionEmpleados implements IGestionEmpleados{
 	public boolean trasladarEmpleado(String dni, String actual, String destino)
 			throws OperacionNoValidaException, DataAccessException {
 		
-		Tienda tActual = tiendasDAO.tiendaPorNombre(actual);
-		Tienda tDestino = tiendasDAO.tiendaPorNombre(destino);
+		Tienda tActual = intTiendas.tiendaPorNombre(actual);
+		Tienda tDestino = intTiendas.tiendaPorNombre(destino);
 		Empleado e = empleado(dni);
 		
 		// Comprobar si existe el empleado y las tiendas
@@ -97,7 +97,7 @@ public class GestionEmpleados implements IGestionEmpleados{
 
 	@Override
 	public Empleado empleado(String dni) throws DataAccessException {
-		return empleadosDAO.empleado(dni);
+		return intEmpleados.empleado(dni);
     }
 
 }

@@ -34,8 +34,7 @@ public class Empleado {
 	/**
 	 * Retorna el sueldo bruto del empleado
 	 */
-public double sueldoBruto() {
-		
+	public double sueldoBruto() {
 		int sueldoBase = 0;
 		int complemento = 0;
 		double sueldoBruto = 0;
@@ -51,14 +50,17 @@ public double sueldoBruto() {
 			sueldoBase = 1000;
 		}
 		
-		long antiguedad = LocalDate.now().getYear() - fechaContratacion.getYear();
-		if (antiguedad > 5) {
+		LocalDate fechaActual = LocalDate.now();
+		if (fechaContratacion.plusYears(5).isBefore(fechaActual) && fechaContratacion.plusYears(10).isAfter(fechaActual) 
+				|| fechaContratacion.plusYears(10).isEqual(fechaActual)) {
 			complemento = 50;
 		} 
-		else if (antiguedad > 10) {
+		else if (fechaContratacion.plusYears(10).isBefore(fechaActual) && fechaContratacion.plusYears(20).isAfter(fechaActual)
+				|| fechaContratacion.plusYears(20).isEqual(fechaActual)) {
 			complemento = 100;
+			
 		}
-		else if (antiguedad > 20) {
+		else if (fechaContratacion.plusYears(20).isBefore(fechaActual)) {
 			complemento = 200;
 		}
 		
