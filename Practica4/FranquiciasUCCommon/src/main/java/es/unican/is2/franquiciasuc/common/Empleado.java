@@ -1,6 +1,7 @@
 package es.unican.is2.franquiciasuc.common;
 
 import java.time.LocalDate;
+
 /**
  * Clase que representa un empleado de la franquicia, 
  * con sus datos personales 
@@ -23,8 +24,18 @@ public class Empleado {
 	 * @param nombre
 	 * @param categoria
 	 * @param fechaContratacion
+	 * @throws OperacionNoValidaException 
 	 */
-	public Empleado(String DNI, String nombre, Categoria categoria, LocalDate fechaContratacion) {
+	public Empleado(String DNI, String nombre, Categoria categoria, LocalDate fechaContratacion) throws OperacionNoValidaException {
+		
+		if (DNI == null || nombre == null || categoria == null || fechaContratacion == null) {
+			throw new NullPointerException();
+		}
+		
+		if (fechaContratacion.isAfter(LocalDate.now())) {
+			throw new OperacionNoValidaException("La fecha de contratacion no puede ser posterior a hoy");
+		}
+		
 		this.nombre = nombre;
 		this.DNI=DNI;
 		this.categoria=categoria;
@@ -34,31 +45,39 @@ public class Empleado {
 	/**
 	 * Retorna el sueldo bruto del empleado
 	 */
-public double sueldoBruto() {
-		
-		int sueldoBase = 0;
-		int complemento = 0;
+	public double sueldoBruto() {
+		double sueldoBase = 0;
+		double complemento = 0;
 		double sueldoBruto = 0;
 		
 		switch (categoria) {
 		case ENCARGADO:
 			sueldoBase = 2000;
+			break;
 			
 		case VENDEDOR:
 			sueldoBase = 1500;
+			break;
 			
 		case AUXILIAR:
 			sueldoBase = 1000;
+			break;
+			
+		default:
+			sueldoBase = 0;
 		}
 		
-		int antiguedad = LocalDate.now().getYear() - fechaContratacion.getYear();
-		if (antiguedad > 5) {
+		LocalDate fechaActual = LocalDate.now();
+		if ((fechaContratacion.plusYears(5).isBefore(fechaActual) && fechaContratacion.plusYears(10).isAfter(fechaActual)) 
+				|| fechaContratacion.plusYears(10).isEqual(fechaActual)) {
 			complemento = 50;
 		} 
-		else if (antiguedad > 10) {
+		else if ((fechaContratacion.plusYears(10).isBefore(fechaActual) && fechaContratacion.plusYears(20).isAfter(fechaActual))
+				|| fechaContratacion.plusYears(20).isEqual(fechaActual)) {
 			complemento = 100;
+			
 		}
-		else if (antiguedad > 20) {
+		else if (fechaContratacion.plusYears(20).isBefore(fechaActual)) {
 			complemento = 200;
 		}
 		
