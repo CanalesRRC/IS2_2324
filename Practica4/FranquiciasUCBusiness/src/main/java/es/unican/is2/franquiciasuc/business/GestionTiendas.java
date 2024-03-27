@@ -49,4 +49,8 @@ public class GestionTiendas implements IGestionTiendas{
 		
 		return intTiendas.tiendaPorNombre(nombre);
 	}
+<<<<<<< HEAD
+=======
+
+>>>>>>> 5e47dc0b0fe4867c59ae8d9089dea1d48b19e573
 }

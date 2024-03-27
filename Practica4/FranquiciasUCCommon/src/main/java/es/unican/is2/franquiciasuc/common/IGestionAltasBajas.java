@@ -2,7 +2,11 @@ package es.unican.is2.franquiciasuc.common;
 
 
 /**
+<<<<<<< HEAD
  * Interfaz de negocio para la gestion de altas y bajas medicas
+=======
+ * Interfaz de negocio para la gesti�n de altas y bajas medicas
+>>>>>>> 5e47dc0b0fe4867c59ae8d9089dea1d48b19e573
  */
 public interface IGestionAltasBajas {
 
