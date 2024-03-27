@@ -6,10 +6,6 @@ import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 5e47dc0b0fe4867c59ae8d9089dea1d48b19e573
 class EmpleadoTest {
 
 	@Test

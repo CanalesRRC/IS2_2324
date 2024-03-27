@@ -1,11 +1,8 @@
 package es.unican.is2.franquiciasuc.common;
 
 import java.time.LocalDate;
-<<<<<<< HEAD
 import java.util.Objects;
-=======
 
->>>>>>> 5e47dc0b0fe4867c59ae8d9089dea1d48b19e573
 /**
  * Clase que representa un empleado de la franquicia, 
  * con sus datos personales 
@@ -28,15 +25,9 @@ public class Empleado {
 	 * @param nombre
 	 * @param categoria
 	 * @param fechaContratacion
-<<<<<<< HEAD
-	 */
-	public Empleado(String DNI, String nombre, Categoria categoria, LocalDate fechaContratacion) throws OperacionNoValidaException {
-=======
-	 * @throws OperacionNoValidaException 
 	 */
 	public Empleado(String DNI, String nombre, Categoria categoria, LocalDate fechaContratacion) throws OperacionNoValidaException {
 		
->>>>>>> 5e47dc0b0fe4867c59ae8d9089dea1d48b19e573
 		if (DNI == null || nombre == null || categoria == null || fechaContratacion == null) {
 			throw new NullPointerException();
 		}
@@ -71,12 +62,9 @@ public class Empleado {
 		case AUXILIAR:
 			sueldoBase = 1000;
 			break;
-<<<<<<< HEAD
-=======
 			
 		default:
 			sueldoBase = 0;
->>>>>>> 5e47dc0b0fe4867c59ae8d9089dea1d48b19e573
 		}
 		
 		LocalDate fechaActual = LocalDate.now();
@@ -116,10 +104,6 @@ public class Empleado {
 		this.baja=false;
 	}
 	
-<<<<<<< HEAD
-=======
-	
->>>>>>> 5e47dc0b0fe4867c59ae8d9089dea1d48b19e573
 	/**
 	 * Retorna el dni del vendedor
 	 * @return id
@@ -160,10 +144,6 @@ public class Empleado {
 	public boolean getBaja() {
 		return baja;
 	}
-<<<<<<< HEAD
-=======
-		
->>>>>>> 5e47dc0b0fe4867c59ae8d9089dea1d48b19e573
 	
 	public void setDNI(String dNI) {
 		DNI = dNI;
@@ -184,8 +164,7 @@ public class Empleado {
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}
-	
-<<<<<<< HEAD
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -197,10 +176,8 @@ public class Empleado {
     }
 	
 	@Override
-	public int hashCode() {
-		return Objects.hash(DNI);
-	}
-	
-=======
->>>>>>> 5e47dc0b0fe4867c59ae8d9089dea1d48b19e573
+    public int hashCode() {
+        return Objects.hash(DNI);
+    }
+
 }

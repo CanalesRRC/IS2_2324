@@ -51,11 +51,7 @@ public class EmpleadosDAO implements IEmpleadosDAO {
 
 	public List<Empleado> empleados() throws DataAccessException {
 		List<Empleado> empleados = new ArrayList<>(); // Lista para retornar a los alumnos
-<<<<<<< HEAD
-		Connection con = H2ServerConnectionManager.getConnection(); // creamos una nueva conexion con la BD
-=======
 		Connection con = H2ServerConnectionManager.getConnection(); // creamos una nueva conexi�n con la BD
->>>>>>> 5e47dc0b0fe4867c59ae8d9089dea1d48b19e573
 
 		try {
 			Statement statement = con.createStatement(); // Creamos un nuevo statement

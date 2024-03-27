@@ -7,11 +7,7 @@ import es.unican.is2.franquiciasuc.dao.TiendasDAO;
 import es.unican.is2.franquiciasuc.gui.VistaGerente;
 
 /**
-<<<<<<< HEAD
- * Clase principal que construye la aplicacion de tres capas y lanza su ejecucion
-=======
  * Clase principal que construye la aplicacion de tres capas y lanza su ejecuci�n
->>>>>>> 5e47dc0b0fe4867c59ae8d9089dea1d48b19e573
  */
 public class Runner {
 
@@ -29,12 +25,5 @@ public class Runner {
 		
 		// Lanzar ejecucion (hacer visible la interfaz)
 		vista.setVisible(true);
-		
-<<<<<<< HEAD
-=======
-	
-		
->>>>>>> 5e47dc0b0fe4867c59ae8d9089dea1d48b19e573
 	}
-
 }

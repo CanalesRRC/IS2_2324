@@ -12,14 +12,8 @@
     </dependency>
     <dependency>
 		<groupId>com.h2database</groupId>
-<<<<<<< HEAD
   		<artifactId>h2</artifactId>
   		<version>2.2.224</version>
-    </dependency>
-=======
-		<artifactId>h2</artifactId>
-		<version>2.2.224</version>
 	</dependency>
->>>>>>> 5e47dc0b0fe4867c59ae8d9089dea1d48b19e573
   </dependencies>
 </project>
