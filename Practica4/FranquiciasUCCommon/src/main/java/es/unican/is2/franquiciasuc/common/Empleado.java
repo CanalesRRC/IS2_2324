@@ -25,7 +25,15 @@ public class Empleado {
 	 * @param categoria
 	 * @param fechaContratacion
 	 */
-	public Empleado(String DNI, String nombre, Categoria categoria, LocalDate fechaContratacion) {
+	public Empleado(String DNI, String nombre, Categoria categoria, LocalDate fechaContratacion) throws OperacionNoValidaException {
+		if (DNI == null || nombre == null || categoria == null || fechaContratacion == null) {
+			throw new NullPointerException();
+		}
+		
+		if (fechaContratacion.isAfter(LocalDate.now())) {
+			throw new OperacionNoValidaException("La fecha de contratacion no puede ser posterior a hoy");
+		}
+		
 		this.nombre = nombre;
 		this.DNI=DNI;
 		this.categoria=categoria;
@@ -36,19 +44,22 @@ public class Empleado {
 	 * Retorna el sueldo bruto del empleado
 	 */
 	public double sueldoBruto() {
-		int sueldoBase = 0;
-		int complemento = 0;
+		double sueldoBase = 0;
+		double complemento = 0;
 		double sueldoBruto = 0;
 		
 		switch (categoria) {
 		case ENCARGADO:
 			sueldoBase = 2000;
+			break;
 			
 		case VENDEDOR:
 			sueldoBase = 1500;
+			break;
 			
 		case AUXILIAR:
 			sueldoBase = 1000;
+			break;
 		}
 		
 		LocalDate fechaActual = LocalDate.now();
