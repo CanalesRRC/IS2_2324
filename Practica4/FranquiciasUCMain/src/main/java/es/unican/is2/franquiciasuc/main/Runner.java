@@ -7,7 +7,7 @@ import es.unican.is2.franquiciasuc.dao.TiendasDAO;
 import es.unican.is2.franquiciasuc.gui.VistaGerente;
 
 /**
- * Clase principal que construye la aplicacion de tres capas y lanza su ejecuci�n
+ * Clase principal que construye la aplicacion de tres capas y lanza su ejecucion
  */
 public class Runner {
 

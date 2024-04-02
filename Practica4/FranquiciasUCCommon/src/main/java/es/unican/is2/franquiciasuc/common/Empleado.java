@@ -36,6 +36,10 @@ public class Empleado {
 			throw new OperacionNoValidaException("La fecha de contratacion no puede ser posterior a hoy");
 		}
 		
+		if (DNI.equals(nombre)) {
+			throw new OperacionNoValidaException("Los datos introducidos son incorrectos");
+		}
+		
 		this.nombre = nombre;
 		this.DNI=DNI;
 		this.categoria=categoria;
@@ -44,8 +48,9 @@ public class Empleado {
 	
 	/**
 	 * Retorna el sueldo bruto del empleado
+	 * @throws OperacionNoValidaException 
 	 */
-	public double sueldoBruto() {
+	public double sueldoBruto() throws OperacionNoValidaException {
 		double sueldoBase = 0;
 		double complemento = 0;
 		double sueldoBruto = 0;
@@ -62,24 +67,21 @@ public class Empleado {
 		case AUXILIAR:
 			sueldoBase = 1000;
 			break;
-			
-		default:
-			sueldoBase = 0;
 		}
 		
 		LocalDate fechaActual = LocalDate.now();
-		if ((fechaContratacion.plusYears(5).isBefore(fechaActual) && fechaContratacion.plusYears(10).isAfter(fechaActual)) 
-				|| fechaContratacion.plusYears(10).isEqual(fechaActual)) {
-			complemento = 50;
-		} 
-		else if ((fechaContratacion.plusYears(10).isBefore(fechaActual) && fechaContratacion.plusYears(20).isAfter(fechaActual))
-				|| fechaContratacion.plusYears(20).isEqual(fechaActual)) {
-			complemento = 100;
-			
+		if (fechaContratacion.isAfter(fechaActual)) {
+			throw new OperacionNoValidaException("La fecha de contratación es incorrecta.");
 		}
-		else if (fechaContratacion.plusYears(20).isBefore(fechaActual)) {
+		else if (fechaActual.minusYears(20).isAfter(fechaContratacion)) {
 			complemento = 200;
 		}
+		else if (fechaActual.minusYears(10).isAfter(fechaContratacion)) {
+			complemento = 100;
+		} 
+		else if (fechaActual.minusYears(5).isAfter(fechaContratacion)) {
+			complemento = 50;
+		} 
 		
 		sueldoBruto = sueldoBase + complemento;
 		
@@ -94,14 +96,14 @@ public class Empleado {
 	 * Dar de baja al empleado
 	 */
 	public void darDeBaja() {
-		this.baja=true;
+		setBaja(true);
 	}
 	
 	/**
 	 * Dar de alta al empleado
 	 */
 	public void darDeAlta() {
-		this.baja=false;
+		setBaja(false);
 	}
 	
 	/**
@@ -167,12 +169,12 @@ public class Empleado {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
-            return true;
-        if (obj == null || getClass() != obj.getClass())
-            return false;
         Empleado empleado = (Empleado) obj;
-        return Objects.equals(DNI, empleado.DNI);
+        return baja == empleado.baja &&
+                Objects.equals(DNI, empleado.DNI) &&
+                Objects.equals(nombre, empleado.nombre) &&
+                categoria == empleado.categoria &&
+                fechaContratacion.isEqual(empleado.fechaContratacion);
     }
 	
 	@Override

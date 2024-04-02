@@ -26,6 +26,11 @@ public class Tienda implements Serializable {
 	 * @param direccion Direccion de la tienda
 	 */
 	public Tienda(String nombre, String direccion) {
+		
+		if (nombre == null || direccion == null) {
+			throw new NullPointerException();
+		}
+		
 		this.nombre=nombre;
 		this.direccion= direccion;
 	}
@@ -35,8 +40,9 @@ public class Tienda implements Serializable {
 	 * Retorna el gasto mensual de la tienda en 
 	 * pagar sueldos de sus empleados.
 	 * @return Total mensual sueldos 
+	 * @throws OperacionNoValidaException 
 	 */
-	public double gastoMensualSueldos() {
+	public double gastoMensualSueldos() throws OperacionNoValidaException {
 		double total = 0.0;
 		for (Empleado e:empleados) {
 			total+=e.sueldoBruto();
@@ -61,7 +67,7 @@ public class Tienda implements Serializable {
 	
 	/**
 	 * Retorna la direcci�n de la tienda
-	 * @return Direcci�n de la tienda
+	 * @return Direccion de la tienda
 	 */
 	public String getDireccion() {
 		return direccion;

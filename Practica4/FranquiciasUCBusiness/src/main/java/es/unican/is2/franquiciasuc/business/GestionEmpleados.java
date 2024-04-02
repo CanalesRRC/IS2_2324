@@ -66,7 +66,6 @@ public class GestionEmpleados implements IGestionEmpleados, IGestionAltasBajas{
 		
 		// Eliminar empleado de la tienda
 		t.getEmpleados().remove(e);
-		
 
 		// Actualizar tienda
 		intTiendas.modificarTienda(t);
