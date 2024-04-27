@@ -33,6 +33,7 @@ class EmpleadoTest {
 			assertEquals(nombre, e1.getNombre());
 			assertEquals(Categoria.AUXILIAR, e1.getCategoria());
 			assertEquals(hoy.minusYears(10), e1.getFechaContratacion());
+			assertEquals(false, e1.getBaja());
 
 			Empleado e2 = new Empleado(dni, nombre, Categoria.VENDEDOR, hoy.minusYears(5));
 			assertNotNull(e2);
@@ -40,6 +41,7 @@ class EmpleadoTest {
 			assertEquals(nombre, e2.getNombre());
 			assertEquals(Categoria.VENDEDOR, e2.getCategoria());
 			assertEquals(hoy.minusYears(5), e2.getFechaContratacion());
+			assertEquals(false, e2.getBaja());
 
 			Empleado e3 = new Empleado(dni, nombre, Categoria.ENCARGADO, hoy);
 			assertNotNull(e3);
@@ -47,6 +49,7 @@ class EmpleadoTest {
 			assertEquals(nombre, e3.getNombre());
 			assertEquals(Categoria.ENCARGADO, e3.getCategoria());
 			assertEquals(hoy, e3.getFechaContratacion());
+			assertEquals(false, e3.getBaja());
 		});
 
 		// Casos de prueba no validos
