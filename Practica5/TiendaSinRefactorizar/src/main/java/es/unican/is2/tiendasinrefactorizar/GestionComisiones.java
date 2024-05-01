@@ -17,7 +17,7 @@ public class GestionComisiones {
 	/**
 	 * Programa principal basado en menu
 	 */
-	public static void main(String[] args) {	//WMC+1
+	public static void main(String[] args) {	//WMC+1  
 		// opciones del menu
 		final int NUEVA_VENTA = 0, VENDEDOR_DEL_MES = 1, VENDEDORES = 2;
 
@@ -40,11 +40,11 @@ public class GestionComisiones {
 		int opcion;
 
 		// lazo de espera de comandos del usuario
-		while (true) {	//WMC+1
+		while (true) {	//WMC+1 //Ccog+1
 			opcion = menu.leeOpcion();
 
 			// realiza las acciones dependiendo de la opcion elegida
-			switch (opcion) {
+			switch (opcion) { //Ccog+2
 			case NUEVA_VENTA:	//WMC+1
 				lect = new Lectura("Datos Venta");
 				lect.creaEntrada("ID Vendedor", "");
@@ -53,10 +53,10 @@ public class GestionComisiones {
 				dni = lect.leeString("ID Vendedor");
 				double importe = lect.leeDouble("Importe");
 				try {
-					if (!tienda.anhadeVenta(dni, importe)) {	//WMC+1
+					if (!tienda.anhadeVenta(dni, importe)) {	//WMC+1 //Ccog+3
 						mensaje("ERROR", "El vendedor no existe");
 					}
-				} catch (DataAccessException e) {	//WMC+1
+				} catch (DataAccessException e) {	//WMC+1 //Ccog+3
 					mensaje("ERROR", "No se pudo guardar el cambio");
 				}
 				break;
@@ -66,23 +66,23 @@ public class GestionComisiones {
 					vendedores = tienda.vendedores();
 					resultado = new LinkedList<Vendedor>();
 					double maxVentas = 0.0;
-					for (Vendedor v : vendedores) {	//WMC+1
-						if (v.getTotalVentas() > maxVentas) {	//WMC+1
+					for (Vendedor v : vendedores) {	//WMC+1 //Ccog+3
+						if (v.getTotalVentas() > maxVentas) {	//WMC+1 //Ccog+4
 							maxVentas = v.getTotalVentas();
 							resultado.clear();
 							resultado.add(v);
-						} else if (v.getTotalVentas() == maxVentas) {	//WMC+1
+						} else if (v.getTotalVentas() == maxVentas) {	//WMC+1 //Ccog+1
 							resultado.add(v);
 						}
 					}
 
 					msj = "";
-					for (Vendedor vn : resultado) {	//WMC+1
+					for (Vendedor vn : resultado) {	//WMC+1 //Ccog+3
 						msj += vn.getNombre() + "\n";
 					}
 					mensaje("VENDEDORES DEL MES", msj);
 
-				} catch (DataAccessException e) {	//WMC+1
+				} catch (DataAccessException e) {	//WMC+1 //Ccog+3
 					mensaje("ERROR", "No se pudo acceder a los datos");
 				}
 				break;
@@ -92,20 +92,20 @@ public class GestionComisiones {
 					vendedores = tienda.vendedores();
 					System.out.println(vendedores.size());
 					Collections.sort(vendedores, new Comparator<Vendedor>() {
-						public int compare(Vendedor o1, Vendedor o2) {	//WMC+1
-							if (o1.getTotalVentas() > o2.getTotalVentas())	//WMC+1
+						public int compare(Vendedor o1, Vendedor o2) {
+							if (o1.getTotalVentas() > o2.getTotalVentas())	//WMC+1 //Ccog+3
 								return -1;
-							else if (o1.getTotalVentas() < o2.getTotalVentas())	//WMC+1
+							else if (o1.getTotalVentas() < o2.getTotalVentas())	//WMC+1 //Ccog+1
 								return 1;
 							return 0;
 						}
 					});
 					msj = "";
-					for (Vendedor vn : vendedores) {	//WMC+1
+					for (Vendedor vn : vendedores) {	//WMC+1 //Ccog+3
 						msj += vn.getNombre() + " (" + vn.getId()+ ") "+vn.getTotalVentas() + "\n";
 					}
 					mensaje("VENDEDORES", msj);
-				} catch (DataAccessException e) {	//WMC+1
+				} catch (DataAccessException e) {	//WMC+1 //Ccog+3
 					mensaje("ERROR", "No se pudo acceder a los datos");
 				}
 				break;
